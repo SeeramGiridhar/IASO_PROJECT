@@ -1,0 +1,8 @@
+import { Link } from 'react-router-dom';
+import { Activity, Calendar, FileText, Heart, Upload } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
+
+export default function PatientDashboard() {
+  const { user } = useAuth();
+  return <div className="max-w-7xl mx-auto px-4 py-10"><div className="flex justify-between items-start gap-6 mb-10"><div><h1 className="text-4xl font-black">Hello, <span className="text-primary-600">{user?.name}</span></h1><p className="text-gray-500">Your health dashboard is ready.</p></div><Link to="/patient/upload" className="px-6 py-3 bg-primary-600 text-white rounded-2xl font-black flex gap-2"><Upload /> Upload Report</Link></div><div className="grid md:grid-cols-4 gap-6 mb-10">{[[Heart,'Heart Rate','72 bpm'],[Activity,'Blood Pressure','120/80'],[FileText,'Reports','1'],[Calendar,'Appointments','1']].map(([Icon,label,value]: any) => <div key={label} className="bg-white p-6 rounded-3xl border"><Icon className="text-primary-600 mb-3" /><p className="text-3xl font-black">{value}</p><p className="text-gray-500 font-bold">{label}</p></div>)}</div><div className="grid md:grid-cols-2 gap-6"><Link to="/patient/reports" className="p-8 rounded-3xl bg-white border"><FileText className="text-primary-600 mb-4" /><h2 className="text-2xl font-black">View Reports</h2><p className="text-gray-500">Open your medical archive and AI summaries.</p></Link><Link to="/patient/doctors" className="p-8 rounded-3xl bg-white border"><Calendar className="text-primary-600 mb-4" /><h2 className="text-2xl font-black">Book Doctor</h2><p className="text-gray-500">Find a specialist and schedule a visit.</p></Link></div></div>;
+}
